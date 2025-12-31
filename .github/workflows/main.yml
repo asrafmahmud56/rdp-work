@@ -1,4 +1,4 @@
-name: RDP 
+name: RSP1 
 
 on:
   workflow_dispatch:
@@ -62,7 +62,12 @@ jobs:
 
       - name: Install Tailscale
         run: |
-          $tsUrl = "https://pkgs.tailscale.com/stable/tailscale-setup-1.82.0-amd64.msi"
+          $installerPath = "D:\_temp\14264d6d-d174-47f9-9af7-93e120db5298.msi"
+
+          Start-Process -FilePath "msiexec.exe" `
+          -ArgumentList @("/i", "`"$installerPath`"", "/qn") `
+          -Wait -NoNewWindow
+
           $installerPath = "$env:TEMP\tailscale.msi"
           
           Invoke-WebRequest -Uri $tsUrl -OutFile $installerPath
